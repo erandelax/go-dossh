@@ -1,0 +1,18 @@
+host: localhost
+port: 23229
+
+containers:
+  php81:
+    as: www # interactive shell will run using www user
+
+users:
+  dev: # username (as in dev@127.0.0.1) 
+    public_key: "ssh-rsa AAAAB3N...zY3apqyh U@U"
+    containers:
+      php81: [restart, logs, sh, bash] # available commands (logs & restart are reserved names, everything else is considered 'exec -it')
+
+  intern:
+    public_key: "ssh-rsa AAAA...apqyh U@U"
+    containers:
+      php81: [logs]
+      postgres: [logs] # will only be able to follow logs
